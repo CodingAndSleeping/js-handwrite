@@ -1,27 +1,4 @@
-# js-handwrite
-
-## instanceof
-
-```js
-function myInstanceOf(target, origin) {
-    // 循环遍历目标对象的原型链
-    while (target) {
-        // 判断target的原型是否是origin的实例对象
-        if (target.__proto__ === origin.prototype) {
-            // 是，则返回true
-            return true;
-        }
-        // 否则让target等于其原型
-        target = target.__proto__;
-    }
-    // 若target的原型不存在了，则返回false
-    return false;
-}
-```
-
-## bind
-
-```js
+// 手写 bind
 Function.prototype.myBind = function (context, ...args1) {
     // bind并不会立即调用而是返回一个函数，并且可以多次传参
     return (...args2) => {
@@ -51,4 +28,3 @@ fn(1, 2, 3); // undefined 1 2 3
 
 let newFn = fn.myBind(obj, 1, 2);
 newFn(3); // lzt 1 2 3
-```
