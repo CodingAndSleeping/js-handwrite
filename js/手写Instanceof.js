@@ -14,7 +14,8 @@ function myInstanceOf(target, origin) {
 }
 
 // 测试
-let arr = [1, 2, 3];
-console.log(myInstanceOf(arr, Array)); // true
-console.log(myInstanceOf(arr, Object)); // true
-console.log(myInstanceOf(arr, Number)); // false
+let a = [1, 2, 3];
+console.log(myInstanceOf(a, Array)); // true
+console.log(myInstanceOf(a, Object)); // true
+console.log(myInstanceOf(a, Number)); // false
+
