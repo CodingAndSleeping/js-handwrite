@@ -150,6 +150,9 @@ myPromise.all = (promises) => {
         let count = 0;
         let resArr = [];
         for (let i = 0; i < promises.length; i++) {
+            if (!(promises[i] instanceof myPromise)) {// 判断数组里的每一项是否是myPromise对象，如果不是则直接包装成一个成功的myPromise对象
+                promises[i] = myPromise.reslove(promises[i]);
+            }
             promises[i].then(
                 res => {
                     count++;
@@ -170,6 +173,9 @@ myPromise.all = (promises) => {
 myPromise.race = (promises) => {
     return new myPromise((reslove, reject) => {
         for (let i = 0; i < promises.length; i++) {
+            if (!(promises[i] instanceof myPromise)) {// 判断数组里的每一项是否是myPromise对象，如果不是则直接包装成一个成功的myPromise对象
+                promises[i] = myPromise.reslove(promises[i]);
+            }
             promises[i].then(
                 res => {
                     reslove(res);
@@ -217,7 +223,7 @@ console.log("第二步")
 */
 
 let p1 = new myPromise((reslove, reject) => {
-    setTimeout(()=>{
+    setTimeout(() => {
         reslove(1);
     }, 1000)
 })

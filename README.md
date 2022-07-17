@@ -276,6 +276,64 @@ class myPromise {
     }
 }
 
+// Promise.reslove方法， 返回一个成功的promise对象
+myPromise.reslove = (value) => {
+    return new myPromise((reslove, reject) => {
+        reslove(value);
+    })
+}
+
+// Promise.reject方法，返回一个失败的promise对象
+myPromise.reject = (value) => {
+    return new myPromise((reslove, reject) => {
+        reject(value);
+    })
+}
+
+// Promise.all方法，当所有的promise都成功，才返回成功结果的数组，有一个失败就返回失败的结果
+myPromise.all = (promises) => {
+    return new myPromise((reslove, reject) => {
+        let count = 0;
+        let resArr = [];
+        for (let i = 0; i < promises.length; i++) {
+            if (!(promises[i] instanceof myPromise)) {// 判断数组里的每一项是否是myPromise对象，如果不是则直接包装成一个成功的myPromise对象
+                promises[i] = myPromise.reslove(promises[i]);
+            }
+            promises[i].then(
+                res => {
+                    count++;
+                    resArr[i] = res;
+                    if (count == promises.length) {
+                        reslove(resArr);
+                    }
+                },
+                err => {
+                    reject(err);
+                }
+            )
+        }
+    })
+}
+
+// Promise.race方法, 谁先有结果谁就先返回
+myPromise.race = (promises) => {
+    return new myPromise((reslove, reject) => {
+        for (let i = 0; i < promises.length; i++) {
+            if (!(promises[i] instanceof myPromise)) {// 判断数组里的每一项是否是myPromise对象，如果不是则直接包装成一个成功的myPromise对象
+                promises[i] = myPromise.reslove(promises[i]);
+            }
+            promises[i].then(
+                res => {
+                    reslove(res);
+                },
+                err => {
+                    reject(err);
+                }
+            )
+        }
+    })
+}
+
 // 测试
 console.log("第一步")
 new myPromise((reslove, reject) => {
