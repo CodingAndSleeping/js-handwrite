@@ -10,4 +10,4 @@
 
 * #### [手写call](https://github.com/CodingAndSleeping/js-handwrite/blob/master/src/myCall.js)
 
-* #### [手写promise](https://github.com/CodingAndSleeping/js-handwrite/blob/master/js/myPromise.js)
+* #### [手写promise](https://github.com/CodingAndSleeping/js-handwrite/blob/master/src/myPromise.js)
