@@ -260,6 +260,20 @@ class myPromise {
     catch(onRejected) {
         return this.then(null, onRejected);
     }
+
+    // finally函数
+    finally(fn) {
+        return this.then(
+            res => {
+                fn();
+                return res;
+            },
+            err => {
+                fn();
+                return err;
+            }
+        )
+    }
 }
 
 // 测试
