@@ -137,7 +137,7 @@ myPromise.reslove = (value) => {
     })
 }
 
-// Promise。reject方法，返回一个失败的promise对象
+// Promise.reject方法，返回一个失败的promise对象
 myPromise.reject = (value) => {
     return new myPromise((reslove, reject) => {
         reject(value);
