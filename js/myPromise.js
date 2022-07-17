@@ -115,15 +115,80 @@ class myPromise {
         return this.then(null, onRejected);
     }
 
+    // finally函数
+    finally(fn) {
+        return this.then(
+            res => {
+                fn();
+                return res;
+            },
+            err => {
+                fn();
+                return err;
+            }
+        )
+    }
+}
+
+// Promise.reslove方法， 返回一个成功的promise对象
+myPromise.reslove = (value) => {
+    return new myPromise((reslove, reject) => {
+        reslove(value);
+    })
+}
+
+// Promise。reject方法，返回一个失败的promise对象
+myPromise.reject = (value) => {
+    return new myPromise((reslove, reject) => {
+        reject(value);
+    })
+}
+
+// Promise.all方法，当所有的promise都成功，才返回成功结果的数组，有一个失败就返回失败的结果
+myPromise.all = (promises) => {
+    return new myPromise((reslove, reject) => {
+        let count = 0;
+        let resArr = [];
+        for (let i = 0; i < promises.length; i++) {
+            promises[i].then(
+                res => {
+                    count++;
+                    resArr[i] = res;
+                    if (count == promises.length) {
+                        reslove(resArr);
+                    }
+                },
+                err => {
+                    reject(err);
+                }
+            )
+        }
+    })
+}
+
+// Promise.race方法, 谁先有结果谁就先返回
+myPromise.race = (promises) => {
+    return new myPromise((reslove, reject) => {
+        for (let i = 0; i < promises.length; i++) {
+            promises[i].then(
+                res => {
+                    reslove(res);
+                },
+                err => {
+                    reject(err);
+                }
+            )
+        }
+    })
 }
 
 // 测试
 console.log("第一步")
 new myPromise((reslove, reject) => {
     setTimeout(() => {
-    reslove("成功了");
-    reject("失败了");
-    console.log("第三步");
+        reslove("成功了");
+        reject("失败了");
+        console.log("第三步");
     }, 1000);
 })
     .then(
@@ -143,3 +208,38 @@ new myPromise((reslove, reject) => {
             console.log("错误是：" + err.message);
         })
 console.log("第二步")
+/*
+    第一步
+    第二步
+    第三步
+    成功了
+    错误是：出错了！
+*/
+
+let p1 = new myPromise((reslove, reject) => {
+    setTimeout(()=>{
+        reslove(1);
+    }, 1000)
+})
+let p2 = myPromise.reslove(2);
+let p3 = myPromise.reject(3)
+
+myPromise.all([p1, p2, p3]).then(
+    res => {
+        console.log(res);
+    },
+    err => {
+        console.log(err);
+    }
+)
+// 3
+
+myPromise.race([p1, p2, p3]).then(
+    res => {
+        console.log(res);
+    },
+    err => {
+        console.log(err);
+    }
+)
+// 2

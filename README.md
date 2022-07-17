@@ -260,7 +260,6 @@ class myPromise {
     catch(onRejected) {
         return this.then(null, onRejected);
     }
-
 }
 
 // 测试
@@ -296,4 +295,32 @@ console.log("第二步")
     成功了
     错误是：出错了！
 */
+
+let p1 = new myPromise((reslove, reject) => {
+    setTimeout(()=>{
+        reslove(1);
+    }, 1000)
+})
+let p2 = myPromise.reslove(2);
+let p3 = myPromise.reject(3)
+
+myPromise.all([p1, p2, p3]).then(
+    res => {
+        console.log(res);
+    },
+    err => {
+        console.log(err);
+    }
+)
+// 3
+
+myPromise.race([p1, p2, p3]).then(
+    res => {
+        console.log(res);
+    },
+    err => {
+        console.log(err);
+    }
+)
+// 2
 ```
