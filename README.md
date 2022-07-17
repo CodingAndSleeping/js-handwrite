@@ -59,7 +59,7 @@ newFn(3); // lzt 1 2 3
 Function.prototype.myApply = function (context, args) {
     // 如果改变的指向为null或undefined，则指向window
     context = context || window;
-    //  将this指向的函数（即调用myBind函数的函数）赋值给context对象的一个属性
+    //  将this指向的函数（即调用myApply函数的函数）赋值给context对象的一个属性
     context.fn = this;
     // 用context来调用该函数，那么该函数中的this则指向context
     let result = context.fn(...args);
@@ -89,7 +89,7 @@ fn.myApply(obj, [1, 2, 3]); // lzt 1 2 3
 Function.prototype.myCall = function (context, ...args) {
     // 如果改变的指向为null或undefined，则指向window
     context = context || window;
-    //  将this指向的函数（即调用myBind函数的函数）赋值给context对象的一个属性
+    //  将this指向的函数（即调用myCall函数的函数）赋值给context对象的一个属性
     context.fn = this;
     // 用context来调用该函数，那么该函数中的this则指向context
     let result = context.fn(...args);
