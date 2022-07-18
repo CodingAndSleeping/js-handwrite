@@ -19,7 +19,7 @@ function throttle(fn, delay) {
     }
 }
 
-// 判断时间间隔版节流函数，接收一个函数和一个延迟时间
+// 事件戳版节流函数，接收一个函数和一个延迟时间
 function throttle(fn, delay) {
     // 初始时间为0
     let time = 0;
