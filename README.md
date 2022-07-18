@@ -13,3 +13,7 @@
 * #### [手写promise](https://github.com/CodingAndSleeping/js-handwrite/blob/master/src/myPromise.js)
 
 * #### [深拷贝deepClone](https://github.com/CodingAndSleeping/js-handwrite/blob/master/src/deepClone.js)
+
+* #### [防抖debounce](https://github.com/CodingAndSleeping/js-handwrite/blob/master/src/debounce.js)
+
+* #### [节流throttle](https://github.com/CodingAndSleeping/js-handwrite/blob/master/src/throttle.js)
