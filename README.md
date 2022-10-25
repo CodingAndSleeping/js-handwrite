@@ -17,3 +17,5 @@
 * #### [防抖debounce](https://github.com/CodingAndSleeping/js-handwrite/blob/master/src/debounce.js)
 
 * #### [节流throttle](https://github.com/CodingAndSleeping/js-handwrite/blob/master/src/throttle.js)
+
+* #### [排序](https://github.com/CodingAndSleeping/js-handwrite/blob/master/src/sort.js)
